@@ -1,7 +1,6 @@
 import base64
-import json
-import os
 from func.registry import load_and_check_registry_data
+from func.price import get_prices, get_price
 
 
 def encode_base64(string):
@@ -10,24 +9,28 @@ def encode_base64(string):
 
 def get_assets(chain, network):
     assets = load_and_check_registry_data(chain, network, "assets")
+    assets = get_prices(assets)
     return assets
 
 
-def get_asset_by_type(chain, network, asset_type):
+def get_assets_by_type(chain, network, asset_type):
     assets = load_and_check_registry_data(chain, network, "assets")
-    asset = [asset for asset in assets if asset["type"] == asset_type]
-    return asset
+    assets = [asset for asset in assets if asset["type"] == asset_type]
+    assets = get_prices(assets)
+    return assets
 
 
-def get_asset_by_slug(chain, network, asset_slug):
+def get_assets_by_slug(chain, network, asset_slug):
     assets = load_and_check_registry_data(chain, network, "assets")
-    asset = [asset for asset in assets if asset_slug in asset["slugs"]]
-    return asset
+    assets = [asset for asset in assets if asset_slug in asset["slugs"]]
+    assets = get_prices(assets)
+    return assets
 
 
 def get_asset(chain, network, b64_asset_id):
     assets = load_and_check_registry_data(chain, network, "assets")
     asset = [asset for asset in assets if encode_base64(asset["id"]) == b64_asset_id][0]
+    asset = get_price(asset)
     return asset
 
 
