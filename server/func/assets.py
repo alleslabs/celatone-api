@@ -9,6 +9,7 @@ def encode_base64(string):
 
 def get_assets(chain, network):
     assets = load_and_check_registry_data(chain, network, "assets")
+    assets = get_prices(assets)
     return assets
 
 
