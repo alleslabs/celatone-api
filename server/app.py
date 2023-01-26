@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import send_file
 import os
 
 import func.codes as codes
@@ -10,7 +10,7 @@ import func.entities as entities
 import func.balances as balances
 
 from apiflask import APIFlask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = APIFlask(__name__, title="My API", version="1.0")
 CORS(app)
@@ -127,18 +127,18 @@ def get_assets(chain, network):
 
 @app.route("/assets/<chain>/<network>/type/<asset_type>", methods=["GET"])
 @app.doc(tags=["Registry Data"])
-def get_asset_by_type(chain, network, asset_type):
+def get_assets_by_type(chain, network, asset_type):
     """Get Assets by Type
 
     Returns a list of all the known assets based on the input chain, network, and asset_type
     """
-    return assets.get_asset_by_type(chain, network, asset_type)
+    return assets.get_assets_by_type(chain, network, asset_type)
 
 
 @app.route("/assets/<chain>/<network>/slug/<asset_slug>", methods=["GET"])
 @app.doc(tags=["Registry Data"])
 def get_asset_by_slug(chain, network, asset_slug):
-    return assets.get_asset_by_slug(chain, network, asset_slug)
+    return assets.get_assets_by_slug(chain, network, asset_slug)
 
 
 @app.route("/assets/<chain>/<network>/<asset_id>", methods=["GET"])

@@ -1,5 +1,3 @@
-import json
-import os
 from func.registry import load_and_check_registry_data
 from func.graphql import get_contract_instantiator_admin
 
