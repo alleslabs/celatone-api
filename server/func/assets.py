@@ -25,13 +25,13 @@ def get_assets_by_slug(chain, network, asset_slug):
     return assets
 
 
-def get_asset(chain, network, b64_asset_id):
+def get_asset(chain, network, asset_id):
     assets = load_and_check_registry_data(chain, network, "assets")
-    asset = [asset for asset in assets if encode_base64(asset["id"]) == b64_asset_id][0]
+    asset = [asset for asset in assets if asset["id"] == asset_id][0]
     return asset
 
 
-""" def get_asset_ibc(chain, network, hash):
+def get_asset_ibc(chain, network, hash):
     assets = load_and_check_registry_data(chain, network, "assets")
     asset = [asset for asset in assets if asset["id"] == f"ibc/{hash}"][0]
     return asset
@@ -52,4 +52,3 @@ def get_asset_gamm(chain, network, pool_id):
     assets = load_and_check_registry_data(chain, network, "assets")
     asset = [asset for asset in assets if asset["id"] == f"gamm/pool/{pool_id}"][0]
     return asset
- """
